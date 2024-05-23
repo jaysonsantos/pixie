@@ -1,13 +1,9 @@
 ---
 name: mirror-demos
 on:
-  workflow_dispatch:
-    inputs:
-      dry_run:
-        description: 'Run the sync in dry-run mode'
-        required: false
-        default: false
-        type: boolean
+  push:
+    branches:
+    - demo_images
 permissions:
   contents: read
 jobs:
@@ -43,5 +39,5 @@ jobs:
       # yamllint disable rule:indentation
       run: |
         cd scripts/regclient
-        regbot once ${{ github.event.inputs.dry_run && ' --dry-run' }} --config regbot_demos.yaml
+        regbot once --dry-run --config regbot_demos.yaml
       # yamllint enable rule:indentation
